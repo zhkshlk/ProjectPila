@@ -1,27 +1,55 @@
 package org.example;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
-public class Run {
+public class Run implements Runnable {
     Scanner sc = new Scanner(System.in);
-    public void run () throws IOException {
-        File file = new File("C:/Users/user/Desktop/Metalabs_Ultimate/ProjectPila/Begin.txt");
-            InputStream in = new FileInputStream(file);
-            byte[] arr = new byte[in.available()];
-            while (in.read(arr) != -1) {
-                in.read(arr);
-            }
-            String s = new String(arr);
-            System.out.println(s);
-            in.close();
-            String varianA = sc.nextLine();
-            if (varianA.contains("а")) {
-                new A1();
+
+    @Override
+    public void run () {
+            try {
+                String variant = sc.nextLine();
+                if (variant.contains("а")) {
+                    new A();
+                    if (sc.hasNextInt()) {
+                    int num = sc.nextInt();
+                    if (num == 1) {
+                        new A1();
+                        if (sc.hasNextInt()) {
+                            int number = sc.nextInt();
+                            if (number == 1) {
+                                new A11();
+                                int answer = sc.nextInt();
+                                if (answer == 36) {
+                                    System.out.println("Вы нашли правильный ответ");
+                                }
+                                else {
+                                    System.out.println("Вы не правильно отгадали");
+                                }
+                            }
+                        }
+                    }
+
+                    }
+                }
+                else if (variant.contains("б")) {
+                    new B();
+                    if (sc.hasNextInt()) {
+                        int num = sc.nextInt();
+                        if (num == 1) {
+                            new Thread(this).start();
+                            this.run();
+                                FileReader file = new FileReader("C:/Users/user/Desktop/Metalabs_Ultimate/ProjectPila/a.txt");
+                                Scanner sc = new Scanner(file);
+                                while (sc.hasNextLine()) {
+                                    System.out.println(sc.nextLine());
+                                }
+                        }
+                    }
+                }
+            } catch (NullPointerException | IOException e) {
+                e.printStackTrace();
             }
     }
 }
