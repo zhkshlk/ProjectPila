@@ -1,14 +1,22 @@
 package org.example;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class WordGuessingGame {
-    String word = "java";
+@Getter
+@Setter
+
+public class WordGuessingGame implements Game {
+    String word = "metalabs";
     StringBuilder guessed = new StringBuilder("_".repeat(word.length()));
     Scanner sc = new Scanner(System.in);
     int attempts = 10;
 
-    public void miniGame() {
+    @Override
+    public void play() {
         while (attempts > 0 && guessed.indexOf("_") != -1) {
             System.out.println("Слово " + guessed);
             System.out.println("У вас осталось попыток: " + attempts);
